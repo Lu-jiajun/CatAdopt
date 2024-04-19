@@ -9,6 +9,9 @@
       <list>
         <option value="$PROJECT_DIR$/user/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/donate/pom.xml" />
+        <option value="$PROJECT_DIR$/volunteer/pom.xml" />
+        <option value="$PROJECT_DIR$/comment/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
