@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/renren-fast/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-generator/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/renren-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/renren-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/renren-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/renren-dynamic-datasource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/renren-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
