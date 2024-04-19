@@ -1,0 +1,91 @@
+@startuml
+
+package "controller" {
+    package "admin" {
+'        class AdminAuthController
+'        class UserController
+'        class CatController
+'        class RequestController
+'        class VolunteerController
+'        class TaskController
+'        class AdoptionController
+'        class MedicalController
+'        class RecordController
+'        class DonationController
+'        class MaterialController
+'        class NoticeController
+        ' ... 其他管理员控制器
+    }
+    package "user" {
+'        class AuthController
+'        class PostController
+'        class CatController
+'        class AdoptionController
+'        class DonationController
+        ' ... 其他用户控制器
+    }
+}
+
+package "service" {
+    package "impl" {
+'        class AdminAuthServiceImpl
+'        class UserServiceImpl
+'        class CatServiceImpl
+'        class RequestServiceImpl
+'        class VolunteerServiceImpl
+'        class TaskServiceImpl
+'        class AdoptionServiceImpl
+'        class MedicalServiceImpl
+'        class RecordServiceImpl
+'        class DonationServiceImpl
+'        class MaterialServiceImpl
+'        class NoticeServiceImpl
+        ' ... 其他服务实现类
+    }
+}
+
+package "repository" {
+    package "impl" {}
+'    class UserRepository
+'    class CatRepository
+'    class RequestRepository
+'    class VolunteerRepository
+'    class TaskRepository
+'    class AdoptionRepository
+'    class MedicalRepository
+'    class RecordRepository
+'    class DonationRepository
+'    class MaterialRepository
+'    class NoticeRepository
+    ' ... 其他数据访问类
+}
+
+package "entity" {
+
+    package "impl" {}
+'    class User
+'    class Cat
+'    class Request
+'    class Volunteer
+'    class Task
+'    class AdoptionApplication
+'    class MedicalAid
+'    class MedicalRecord
+'    class Donation
+'    class Material
+'    class Notice
+    ' ... 其他实体类
+}
+
+package "util" {
+'    class JwtUtils
+'    class PasswordUtils
+'    class FileUtils
+    ' ... 其他工具类
+}
+
+controller ..> service
+service ..> repository
+repository ..> entity
+
+@enduml

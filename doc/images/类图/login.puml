@@ -1,0 +1,40 @@
+@startuml
+
+class LoginController {
+  + login(username, password): String
+}
+
+class UserService {
+  + getUserByUsername(username): User
+}
+
+class AuthenticationService {
+  + login(username, password): String
+}
+
+class PasswordEncoder {
+  + encode(password): String
+  + matches(rawPassword, encodedPassword): boolean
+}
+
+class UserDAO {
+  + findByUsername(username): User
+}
+
+class DataSource {
+  + getConnection(): Connection
+}
+
+class User {
+  - username: String
+  - password: String
+  - ...
+}
+
+LoginController --> AuthenticationService
+AuthenticationService --> UserService
+UserService --> UserDAO
+UserDAO --> DataSource
+AuthenticationService --> PasswordEncoder
+
+@enduml

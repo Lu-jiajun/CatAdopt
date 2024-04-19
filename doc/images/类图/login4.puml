@@ -1,0 +1,69 @@
+@startuml
+
+interface AuthenticationService {
+  + authenticate(username, password): String
+}
+
+class AuthenticationServiceImpl implements AuthenticationService {
+  + authenticate(username, password): String
+}
+
+interface UserService {
+  + findByUsername(username): User
+}
+
+class UserServiceImpl implements UserService {
+  + findByUsername(username): User
+}
+
+class JwtTokenProvider {
+  + createToken(username, roles): String
+  + validateToken(token): boolean
+  + ...
+}
+
+class SecurityConfig {
+  + configure(http): void
+}
+
+annotation "@Service" as Service
+annotation "@RestController" as RestController
+annotation "@Autowired" as Autowired
+annotation "@Mapper" as Mapper
+
+class UserController {
+  + login(username, password): String
+  + ...
+}
+
+interface UserMapper {
+  + findByUsername(username): User
+  + ...
+}
+
+class User {
+  - id: Long
+  - username: String
+  - password: String
+  - ...
+}
+
+AuthenticationServiceImpl ..> UserService
+AuthenticationServiceImpl ..> JwtTokenProvider
+UserServiceImpl ..> UserMapper
+UserController ..> AuthenticationService
+
+Service ..-> AuthenticationServiceImpl
+Service ..-> UserServiceImpl
+RestController ..-> UserController
+Autowired ..- UserService
+Autowired ..- JwtTokenProvider
+Mapper ..> UserMapper
+UserMapper ..>User
+ SecurityConfig..>AuthenticationService
+
+note left of UserMapper
+  MyBatis Mapper
+end note
+
+@enduml

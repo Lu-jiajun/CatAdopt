@@ -1,0 +1,49 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title 流浪猫救助平台后台管理系统架构图
+
+Person(admin, "管理员", "平台管理人员")
+System_Ext(frontend, "前端", "Vue.js", "负责管理员界面和交互")
+System_Ext(db, "数据库", "MySQL", "存储平台数据")
+System_Ext(cache, "缓存", "Redis", "缓存热点数据")
+System_Ext(storage, "文件存储", "AWS S3", "存储图片和视频")
+
+Container(api_gateway, "API 网关", "Spring Cloud Gateway", "统一管理 API 接口")
+ContainerDb(auth_service, "认证授权服务", "Spring Security + JWT", "管理员登录、权限管理")
+ContainerDb(user_service, "用户服务", "Spring Boot + MyBatis", "用户信息管理")
+ContainerDb(cat_service, "流浪猫服务", "Spring Boot + MyBatis", "流浪猫信息管理、审核")
+ContainerDb(volunteer_service, "志愿者服务", "Spring Boot + MyBatis", "志愿者申请、任务管理")
+ContainerDb(adoption_service, "领养服务", "Spring Boot + MyBatis", "领养申请审批、进度跟踪")
+ContainerDb(medical_service, "医疗救助服务", "Spring Boot + MyBatis", "医疗救助信息、记录管理")
+ContainerDb(donation_service, "捐赠服务", "Spring Boot + MyBatis", "捐赠记录、物资管理")
+ContainerDb(notice_service, "公告服务", "Spring Boot + MyBatis", "公告发布、管理")
+
+Rel(admin, frontend, "使用")
+Rel(frontend, api_gateway, "调用 API")
+
+Rel(api_gateway, auth_service, "调用")
+Rel(api_gateway, user_service, "调用")
+Rel(api_gateway, cat_service, "调用")
+Rel(api_gateway, volunteer_service, "调用")
+Rel(api_gateway, adoption_service, "调用")
+Rel(api_gateway, medical_service, "调用")
+Rel(api_gateway, donation_service, "调用")
+Rel(api_gateway, notice_service, "调用")
+
+Rel(auth_service, db, "读写")
+Rel(user_service, db, "读写")
+Rel(cat_service, db, "读写")
+Rel(volunteer_service, db, "读写")
+Rel(adoption_service, db, "读写")
+Rel(medical_service, db, "读写")
+Rel(donation_service, db, "读写")
+Rel(notice_service, db, "读写")
+
+Rel(user_service, cache, "读写")
+Rel(cat_service, cache, "读写")
+
+Rel(cat_service, storage, "上传/下载文件")
+Rel(notice_service, storage, "上传/下载文件")
+
+@enduml

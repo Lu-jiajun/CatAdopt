@@ -1,0 +1,15 @@
+@startuml
+
+entity "users" as users {
+    id int <<PK>> <<auto_increment>>
+    username varchar <<unique>> <<not null>>
+    password varchar <<not null>>
+    email varchar <<unique>>
+    phone_number varchar
+    ...
+}
+
+users ||--o{ roles : "多对多"
+users ||--|{ orders : "一对多"
+
+@enduml

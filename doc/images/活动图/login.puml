@@ -1,0 +1,31 @@
+@startuml
+
+|前端页面|
+start
+:输入用户名和密码，点击“登录”按钮;
+|AuthController|
+:调用 login(username, password) 方法;
+|AuthServiceImpl|
+:查询用户信息;
+|UserRepository|
+:返回用户信息;
+|AuthServiceImpl|
+:验证密码;
+if() then (密码正确)
+  |AuthServiceImpl|
+  :生成 JWT token;
+else (密码错误)
+  |AuthServiceImpl|
+  :返回错误信息;
+endif
+|AuthController|
+:返回结果 (token 或错误信息);
+|前端页面|
+if() then (登录成功)
+  :保存 token 并跳转到用户主页;
+else (登录失败)
+  :显示错误信息;
+endif
+
+stop
+@enduml

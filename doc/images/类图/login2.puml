@@ -1,0 +1,50 @@
+@startuml
+
+class LoginController {
+  + login(username, password): String
+  + logout(): String
+}
+
+class UserService {
+  - userDAO: UserDAO
+  + getUserByUsername(username): User
+}
+
+class AuthenticationService {
+  - userService: UserService
+  - passwordEncoder: PasswordEncoder
+  - jwtTokenProvider: JwtTokenProvider
+  + authenticate(username, password): String
+}
+
+class PasswordEncoder {
+  + encode(password): String
+  + matches(rawPassword, encodedPassword): boolean
+}
+
+class JwtTokenProvider {
+  - secretKey: String
+  - validityInMilliseconds: long
+  + createToken(username, roles): String
+  + validateToken(token): boolean
+  + getUsername(token): String
+  + getRoles(token): List<String>
+}
+
+interface UserDAO {
+  + findByUsername(username): User
+}
+
+class User {
+  - username: String
+  - password: String
+  - ...
+}
+
+LoginController --> AuthenticationService
+AuthenticationService --> UserService
+UserService --> UserDAO
+AuthenticationService --> PasswordEncoder
+AuthenticationService --> JwtTokenProvider
+
+@enduml

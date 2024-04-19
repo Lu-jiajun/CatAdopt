@@ -1,0 +1,30 @@
+@startuml
+autonumber
+
+actor 管理员
+participant RequestController
+participant RequestServiceImpl
+participant RequestRepository
+participant CatRepository
+
+管理员 -> RequestController: 审核求助信息请求
+activate RequestController
+RequestController -> RequestServiceImpl: 调用 approveRequest(requestId) 方法
+activate RequestServiceImpl
+RequestServiceImpl -> RequestRepository: 获取求助信息详情
+activate RequestRepository
+RequestRepository --> RequestServiceImpl: 返回求助信息详情
+deactivate RequestRepository
+RequestServiceImpl -> CatRepository: 更新流浪猫状态为“待领养”
+activate CatRepository
+CatRepository --> RequestServiceImpl: 返回更新结果
+deactivate CatRepository
+RequestServiceImpl -> RequestRepository: 更新求助信息状态为“已审核”
+activate RequestRepository
+RequestRepository --> RequestServiceImpl: 返回更新结果
+deactivate RequestRepository
+RequestServiceImpl --> RequestController: 返回操作结果
+deactivate RequestServiceImpl
+RequestController --> 管理员: 返回操作结果
+deactivate RequestController
+@enduml

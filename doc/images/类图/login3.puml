@@ -1,0 +1,48 @@
+@startuml
+
+class AuthenticationService {
+  + authenticate(username, password): String
+}
+
+class UserService {
+  + getUserByUsername(username): User
+  + ...
+}
+
+class JwtTokenProvider {
+  + createToken(username, roles): String
+  + validateToken(token): boolean
+  + ...
+}
+
+class SecurityConfig {
+  + configure(http): void
+}
+
+class UserController {
+  + login(username, password): String
+  + ...
+}
+
+class UserMapper {
+  + findByUsername(username): User
+  + ...
+}
+
+AuthenticationService ..> UserService
+AuthenticationService ..> JwtTokenProvider
+UserController ..> AuthenticationService
+UserService ..> UserMapper
+SecurityConfig ..> AuthenticationService
+
+class User {
+  - username: String
+  - password: String
+  - ...
+}
+
+note left of UserMapper
+  MyBatis Mapper
+end note
+
+@enduml

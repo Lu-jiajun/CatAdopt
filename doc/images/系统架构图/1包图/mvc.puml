@@ -1,0 +1,71 @@
+@startuml
+package "校猫荟流浪猫救助领养平台" {
+package "控制层 (Controller)" {
+    package "controller"
+'  class AdminController
+'  class CatController
+'  class CommentController
+'  class DonationController
+'  class PostController
+'  class UserController
+'  class VolunteerController
+}
+
+package "业务层 (Service)" {
+    package "service"
+'  interface AdminService
+'  interface CatService
+'  interface CommentService
+'  interface DonationService
+'  interface PostService
+'  interface UserService
+'  interface VolunteerService
+}
+
+package "业务层实现 (Service Impl)" {
+
+    package "Impl"
+'  class AdminServiceImpl
+'  class CatServiceImpl
+'  class CommentServiceImpl
+'  class DonationServiceImpl
+'  class PostServiceImpl
+'  class UserServiceImpl
+'  class VolunteerServiceImpl
+}
+
+package "数据访问层 (Dao/repository)" {
+    package "repository"
+'  interface AdminDao/repository
+'  interface CatDao/repository
+'  interface CommentDao/repository
+'  interface DonationDao/repository
+'  interface PostDao/repository
+'  interface UserDao/repository
+'  interface VolunteerDao/repository
+}
+
+package "实体类 (Entity)" {
+    package "model"
+'  class Admin
+'  class Cat
+'  class Comment
+'  class Donation
+'  class Post
+'  class User
+'  class Volunteer
+'  class VolunteerTask
+}
+
+package "显示层 (View)" {
+'  class JwtView
+package "vue"
+}
+
+"控制层 (Controller)" --> "业务层 (Service)"
+"业务层 (Service)" --> "业务层实现 (Service Impl)"
+"业务层实现 (Service Impl)" --> "数据访问层 (Dao/repository)"
+"数据访问层 (Dao/repository)" --> "实体类 (Entity)"
+"显示层 (View)" --> "控制层 (Controller)"
+}
+@enduml

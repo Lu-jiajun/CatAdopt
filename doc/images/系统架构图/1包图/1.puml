@@ -1,0 +1,74 @@
+@startuml
+package "校猫荟流浪猫救助领养平台" {
+  package controller {
+    class AdminController
+    class CatController
+    class CommentController
+    class DonationController
+    class PostController
+    class UserController
+    class VolunteerController
+  }
+  package service {
+    interface AdminService
+    interface CatService
+    interface CommentService
+    interface DonationService
+    interface PostService
+    interface UserService
+    interface VolunteerService
+  }
+  package service.impl {
+    class AdminServiceImpl
+    class CatServiceImpl
+    class CommentServiceImpl
+    class DonationServiceImpl
+    class PostServiceImpl
+    class UserServiceImpl
+    class VolunteerServiceImpl
+  }
+  package dao {
+    interface AdminDao
+    interface CatDao
+    interface CommentDao
+    interface DonationDao
+    interface PostDao
+    interface UserDao
+    interface VolunteerDao
+  }
+  package entity {
+    class Admin
+    class Cat
+    class Comment
+    class Donation
+    class Post
+    class User
+    class Volunteer
+    class VolunteerTask
+  }
+  package util {
+    class JwtUtil
+  }
+  AdminController ..> AdminService
+  CatController ..> CatService
+  CommentController ..> CommentService
+  DonationController ..> DonationService
+  PostController ..> PostService
+  UserController ..> UserService
+  VolunteerController ..> VolunteerService
+  AdminService ..> AdminDao
+  CatService ..> CatDao
+  CommentService ..> CommentDao
+  DonationService ..> DonationDao
+  PostService ..> PostDao
+  UserService ..> UserDao
+  VolunteerService ..> VolunteerDao
+  JwtUtil --> AdminController
+  JwtUtil --> CatController
+  JwtUtil --> CommentController
+  JwtUtil --> DonationController
+  JwtUtil --> PostController
+  JwtUtil --> UserController
+  JwtUtil --> VolunteerController
+}
+@enduml
