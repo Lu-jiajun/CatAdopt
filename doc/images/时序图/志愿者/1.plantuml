@@ -1,0 +1,56 @@
+@startuml
+'autonumber
+
+actor 志愿者
+participant 前端页面
+participant VolunteerController
+participant VolunteerServiceImpl
+participant VolunteerRepository
+
+志愿者 -> 前端页面: 填写志愿者申请信息并点击“提交”按钮
+activate 前端页面
+前端页面 -> VolunteerController: 发送志愿者申请请求 (volunteerInfo)
+activate VolunteerController
+VolunteerController -> VolunteerServiceImpl: 调用 applyVolunteer(volunteerInfo) 方法
+activate VolunteerServiceImpl
+VolunteerServiceImpl -> VolunteerRepository: 保存志愿者申请信息 (状态为 "待审核")
+activate VolunteerRepository
+VolunteerRepository --> VolunteerServiceImpl: 返回保存结果
+deactivate VolunteerRepository
+VolunteerServiceImpl --> VolunteerController: 返回操作结果
+deactivate VolunteerServiceImpl
+VolunteerController --> 前端页面: 返回操作结果
+deactivate VolunteerController
+前端页面 --> 志愿者: 显示操作结果 (“申请已提交，等待审核”)
+deactivate 前端页面
+
+'...  (一段时间后，管理员审核申请)
+
+alt 审核通过
+  管理员 -> VolunteerServiceImpl: 调用 approveVolunteer(volunteerId, "通过") 方法
+  activate VolunteerServiceImpl
+  VolunteerServiceImpl -> VolunteerRepository: 更新志愿者状态为 "审核通过"
+  activate VolunteerRepository
+  VolunteerRepository --> VolunteerServiceImpl: 返回更新结果
+  deactivate VolunteerRepository
+  VolunteerServiceImpl --> 管理员: 返回操作结果
+  deactivate VolunteerServiceImpl
+  管理员 -> 前端页面: 发送通知
+  activate 前端页面
+  前端页面 --> 志愿者: 显示通知 (“恭喜您，您的志愿者申请已通过！”)
+  deactivate 前端页面
+else 审核拒绝
+  管理员 -> VolunteerServiceImpl: 调用 approveVolunteer(volunteerId, "拒绝") 方法
+  activate VolunteerServiceImpl
+  VolunteerServiceImpl -> VolunteerRepository: 更新志愿者状态为 "审核拒绝"
+  activate VolunteerRepository
+  VolunteerRepository --> VolunteerServiceImpl: 返回更新结果
+  deactivate VolunteerRepository
+  VolunteerServiceImpl --> 管理员: 返回操作结果
+  deactivate VolunteerServiceImpl
+  管理员 -> 前端页面: 发送通知
+  activate 前端页面
+  前端页面 --> 志愿者: 显示通知 (“抱歉，您的志愿者申请未通过审核。”)
+  deactivate 前端页面
+end
+@enduml

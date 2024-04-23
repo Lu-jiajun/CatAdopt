@@ -1,0 +1,92 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class admins {
+   adminName: varchar(20)
+   adminPwd: varchar(20)
+   realName: varchar(20)
+   telephone: varchar(20)
+   Email: varchar(20)
+   birthday: date
+   sex: varchar(3)
+   pic: varchar(100)
+   remark: varchar(255)
+   id: int
+}
+class adoptanimal {
+   userId  /* 用户表id的外键 */: int
+   petId  /* 宠物表id的外键 */: int
+   adoptTime: date
+   state  /* 是否同意被领养 0 是不同意 1 还在审核 2 是同意 */: int
+   id: int
+}
+class answer {
+   userId: int
+   replyId: int
+   commentId: int
+   answerTime: date
+   content: varchar(200)
+   id: int
+}
+class apply {
+   name: varchar(10)
+   Email: varchar(20)
+   age: int
+   telephone: varchar(20)
+   message: varchar(100)
+   applyTime: date
+   state: int
+   id: int
+}
+class blog {
+   actionTime: date
+   address: varchar(50)
+   people: varchar(100)
+   event: varchar(100)
+   title: varchar(20)
+   id: int
+}
+class help {
+   userId: int
+   adminsId: int
+   petId: int
+   commentTime: date
+   content  /* 评论的内容 */: varchar(200)
+   state: int
+   id: int
+}
+class pet {
+   petName: varchar(20)
+   petType  /* 宠物类型 */: varchar(20)
+   sex  /* 性别 */: varchar(3)
+   birthday: date
+   pic  /* 头像 */: varchar(100)
+   state  /* 现在的状态 0 没有申请领养 1 被申请领养 2 已经被领养 */: int
+   remark  /* 备注 */: varchar(100)
+   id: int
+}
+class user {
+   userName: varchar(20)
+   password: varchar(30)
+   sex  /* 性别 */: varchar(3)
+   age  /* 年龄 */: int
+   telephone  /* 电话 */: varchar(20)
+   Email  /* Email */: varchar(30)
+   address  /* 地址 */: varchar(50)
+   pic: varchar(100)
+   state  /* 有无领养宠物的经历 0 是没有 1 是由 */: int
+   id: int
+}
+
+adoptanimal  -[#595959,plain]-^  pet         : "petId:id"
+adoptanimal  -[#595959,plain]-^  user        : "userId:id"
+answer       -[#595959,plain]-^  answer      : "replyId:id"
+answer       -[#595959,plain]-^  help        : "commentId:id"
+answer       -[#595959,plain]-^  user        : "userId:id"
+help         -[#595959,plain]-^  admins      : "adminsId:id"
+help         -[#595959,plain]-^  pet         : "petId:id"
+help         -[#595959,plain]-^  user        : "userId:id"
+@enduml

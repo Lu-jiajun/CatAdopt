@@ -1,0 +1,100 @@
+@startuml
+!theme plain
+
+hide methods
+skinparam linetype ortho
+
+entity admins {
+  adminName: varchar(20)
+  adminPwd: varchar(20)
+  realName: varchar(20)
+  telephone: varchar(20)
+  Email: varchar(20)
+  birthday: date
+  sex: varchar(3)
+  pic: varchar(100)
+  remark: varchar(255)
+  id: int
+}
+
+entity adoptanimal {
+  userId /* 用户表id的外键 */: int
+  petId /* 宠物表id的外键 */: int
+  adoptTime: date
+  state /* 是否同意被领养 0 是不同意 1 还在审核 2 是同意 */: int
+  id: int
+}
+
+entity answer {
+  userId: int
+  replyId: int
+  commentId: int
+  answerTime: date
+  content: varchar(200)
+  id: int
+}
+
+entity apply {
+  name: varchar(10)
+  Email: varchar(20)
+  age: int
+  telephone: varchar(20)
+  message: varchar(100)
+  applyTime: date
+  state: int
+  id: int
+}
+
+entity blog {
+  actionTime: date
+  address: varchar(50)
+  people: varchar(100)
+  event: varchar(100)
+  title: varchar(20)
+  id: int
+}
+
+entity help {
+  userId: int
+  adminsId: int
+  petId: int
+  commentTime: date
+  content: varchar
+  state: int
+  id: int
+}
+
+entity pet {
+  petName: varchar(20)
+  petType /* 宠物类型 */: varchar(20)
+  sex /* 性别 */: varchar(3)
+  birthday: date
+  pic /* 头像 */: varchar(100)
+  state /* 现在的状态 0 没有申请领养 1 被申请领养 2 已经被领养 */: int
+  remark /* 备注 */: varchar(100)
+  id: int
+}
+
+entity user {
+  userName: varchar(20)
+  password: varchar(30)
+  sex /* 性别 */: varchar(3)
+  age /* 年龄 */: int
+  telephone /* 电话 */: varchar(20)
+  Email /* Email */: varchar(30)
+  address /* 地址 */: varchar(50)
+  pic: varchar(100)
+  state /* 有无领养宠物的经历 0 是没有 1 是由 */: int
+  id: int
+}
+
+adoptanimal ||--o{ pet : "petId:id"
+adoptanimal ||--o{ user : "userId:id"
+answer ||--o{ answer : "replyId:id"
+answer ||--o{ help : "commentId:id"
+answer ||--o{ user : "userId:id"
+help ||--o{ admins : "adminsId:id"
+help ||--o{ pet : "petId:id"
+help ||--o{ user : "userId:id"
+
+@enduml

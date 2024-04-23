@@ -1,0 +1,100 @@
+@startuml
+'!theme plain
+
+hide methods
+skinparam linetype ortho
+
+class Admins <<entity>>{
+  adminName: varchar(20)
+  adminPwd: varchar(20)
+  realName: varchar(20)
+  telephone: varchar(20)
+  Email: varchar(20)
+  birthday: date
+  sex: varchar(3)
+  pic: varchar(100)
+  remark: varchar(255)
+  id: int
+}
+
+class AdoptAnimal <<entity>>{
+  userId: int  // Foreign key to User
+  petId: int   // Foreign key to Pet
+  adoptTime: date
+  state: int
+  id: int
+}
+
+class Answer <<entity>>{
+  userId: int   // Foreign key to User
+  replyId: int  // Foreign key to Answer (self-referencing)
+  commentId: int // Foreign key to Help
+  answerTime: date
+  content: varchar(200)
+  id: int
+}
+
+class Apply <<entity>>{
+  name: varchar(10)
+  Email: varchar(20)
+  age: int
+  telephone: varchar(20)
+  message: varchar(100)
+  applyTime: date
+  state: int
+  id: int
+}
+
+class Blog <<entity>>{
+  actionTime: date
+  address: varchar(50)
+  people: varchar(100)
+  event: varchar(100)
+  title: varchar(20)
+  id: int
+}
+
+class Help <<entity>>{
+  userId: int   // Foreign key to User
+  adminsId: int // Foreign key to Admins
+  petId: int   // Foreign key to Pet
+  commentTime: date
+  content: varchar
+  state: int
+  id: int
+}
+
+class Pet <<entity>>{
+  petName: varchar(20)
+  petType: varchar(20)
+  sex: varchar(3)
+  birthday: date
+  pic: varchar(100)
+  state: int
+  remark: varchar(100)
+  id: int
+}
+
+class User <<entity>>{
+  userName: varchar(20)
+  password: varchar(30)
+  sex: varchar(3)
+  age: int
+  telephone: varchar(20)
+  Email: varchar(30)
+  address: varchar(50)
+  pic: varchar(100)
+  state: int
+  id: int
+}
+
+AdoptAnimal "1" -- "N" Pet
+AdoptAnimal "1" -- "N" User
+Answer "1" -- "N" Answer
+Answer "N" -- "1" Help
+Answer "N" -- "1" User
+Help "N" -- "1" Admins
+Help "N" -- "1" Pet
+Help "N" -- "1" User
+
+@enduml

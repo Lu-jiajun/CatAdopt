@@ -1,0 +1,39 @@
+@startuml
+actor 管理员
+participant 前端页面
+participant AdminAuthController
+participant AdminAuthServiceImpl
+participant AdminRepository
+
+管理员 -> 前端页面: 输入用户名和密码，点击“登录”按钮
+activate 前端页面
+前端页面 -> AdminAuthController: 发送登录请求 (username, password)
+activate AdminAuthController
+AdminAuthController -> AdminAuthServiceImpl: 调用 login(username, password) 方法
+activate AdminAuthServiceImpl
+AdminAuthServiceImpl -> AdminRepository: 查询管理员信息
+activate AdminRepository
+AdminRepository --> AdminAuthServiceImpl: 返回管理员信息
+deactivate AdminRepository
+alt 管理员信息存在
+    AdminAuthServiceImpl -> AdminAuthServiceImpl: 验证密码
+    alt 密码正确
+        AdminAuthServiceImpl -> AdminAuthServiceImpl: 生成 JWT token
+        AdminAuthServiceImpl --> AdminAuthController: 返回 JWT token
+    else 密码错误
+        AdminAuthServiceImpl --> AdminAuthController: 返回错误信息
+    end
+else 管理员信息不存在
+    AdminAuthServiceImpl --> AdminAuthController: 返回错误信息
+end
+deactivate AdminAuthServiceImpl
+AdminAuthController --> 前端页面: 返回结果 (token 或错误信息)
+deactivate AdminAuthController
+alt 登录成功
+    前端页面 -> 前端页面: 将 token 保存到本地存储
+    前端页面 --> 管理员: 跳转到后台管理主页
+else 登录失败
+    前端页面 --> 管理员: 显示错误信息
+end
+deactivate 前端页面
+@enduml

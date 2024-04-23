@@ -2,23 +2,29 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="volunteer" />
+        <module name="common" />
+        <module name="cat" />
         <module name="renren-fast" />
-        <module name="comment" />
         <module name="donate" />
+        <module name="community" />
         <module name="user" />
+        <module name="renren-generator" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="profile" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="renren-fast" options="-parameters" />
-      <module name="renren-generator" options="" />
+      <module name="renren-generator" options="-parameters" />
     </option>
   </component>
 </project>

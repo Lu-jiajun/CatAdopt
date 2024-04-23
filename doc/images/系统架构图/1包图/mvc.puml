@@ -1,71 +1,108 @@
 @startuml
+skinparam linetype ortho
+'skinparam linetype polyline
+'top to bottom direction
 package "校猫荟流浪猫救助领养平台" {
-package "控制层 (Controller)" {
-    package "controller"
-'  class AdminController
-'  class CatController
-'  class CommentController
-'  class DonationController
-'  class PostController
-'  class UserController
-'  class VolunteerController
+package "网关(nacous)" {
+    package "nacous"
 }
 
 package "业务层 (Service)" {
-    package "service"
-'  interface AdminService
-'  interface CatService
-'  interface CommentService
-'  interface DonationService
-'  interface PostService
-'  interface UserService
-'  interface VolunteerService
-}
+    package "admin" {
+'                package "admin.controller"
+'                package "admin.service"
+'                package "admin.entity"
+'                package "admin.mapper"
+'                "admin.controller" --> "admin.service"
+'                "admin.service" --> "admin.mapper"
+'                "admin.mapper" --> "admin.entity"
+            }
+'    package "renren-fast"{
+'    }
+    package "volunteer" {
+'                package "volunteer.controller"
+'                package "volunteer.service"
+'                package "volunteer.entity"
+'                package "volunteer.mapper"
+'                "volunteer.controller" --> "volunteer.service"
+'                "volunteer.service" --> "volunteer.mapper"
+'                "volunteer.mapper" --> "volunteer.entity"
+            }
 
-package "业务层实现 (Service Impl)" {
+     package "donate" {
+'                package "donate.controller"
+'                package "donate.service"
+'                package "donate.entity"
+'                package "donate.mapper"
+'                "donate.controller" --> "donate.service"
+'                "donate.service" --> "donate.mapper"
+'                "donate.mapper" --> "donate.entity"
+            }
+     package "user" {
+'                package "user.controller"
+'                package "user.service"
+'                package "user.entity"
+'                package "user.mapper"
+'                "user.controller" --> "user.service"
+'                "user.service" --> "user.mapper"
+'                "user.mapper" --> "user.entity"
+            }
 
-    package "Impl"
-'  class AdminServiceImpl
-'  class CatServiceImpl
-'  class CommentServiceImpl
-'  class DonationServiceImpl
-'  class PostServiceImpl
-'  class UserServiceImpl
-'  class VolunteerServiceImpl
+     package "cat" {
+'                package "cat.controller"
+'                package "cat.service"
+'                package "cat.entity"
+'                package "cat.mapper"
+'                "cat.controller" --> "cat.service"
+'                "cat.service" --> "cat.mapper"
+'                "cat.mapper" --> "cat.entity"
+            }
+     package "Community" {
+
+     }
+
 }
 
 package "数据访问层 (Dao/repository)" {
-    package "repository"
-'  interface AdminDao/repository
-'  interface CatDao/repository
-'  interface CommentDao/repository
-'  interface DonationDao/repository
-'  interface PostDao/repository
-'  interface UserDao/repository
-'  interface VolunteerDao/repository
+
+    package "spring-boot-mybatis-plus"
+    package “spring-boot-redis”
+
 }
 
-package "实体类 (Entity)" {
-    package "model"
-'  class Admin
-'  class Cat
-'  class Comment
-'  class Donation
-'  class Post
-'  class User
-'  class Volunteer
-'  class VolunteerTask
+package "工具层 (common)" {
+    package "exception"
+    package “utils”
+'    package “sql”
+'    package “validator”
+'    package “srping-security”
+
+
+}
+
+package "外部系统" {
+    package "mysql"
+    package “redis”
+    package “sms”
+    package “cos”
+    package “Amap”
+
 }
 
 package "显示层 (View)" {
 '  class JwtView
-package "vue"
+package "客户端"
+package "后台管理"
 }
 
-"控制层 (Controller)" --> "业务层 (Service)"
-"业务层 (Service)" --> "业务层实现 (Service Impl)"
-"业务层实现 (Service Impl)" --> "数据访问层 (Dao/repository)"
-"数据访问层 (Dao/repository)" --> "实体类 (Entity)"
-"显示层 (View)" --> "控制层 (Controller)"
+"网关(nacous)" -down-> "业务层 (Service)"
+'"工具层 (common)" -[hidden]-up-> "业务层 (Service)"
+"业务层 (Service)" -down-> "工具层 (common)"
+
+"工具层 (common)" -down-> "数据访问层 (Dao/repository)"
+'"数据访问层 (Dao/repository)" -down-> "实体类 (Entity)"
+"显示层 (View)" -down-> "网关(nacous)"
+
+“数据访问层 (Dao/repository)” -down-> "外部系统"
 }
 @enduml

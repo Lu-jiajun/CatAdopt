@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fun.catadopt.cat.dao.BlogDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="fun.catadopt.cat.entity.BlogEntity" id="blogMap">
+        <result property="id" column="id"/>
+        <result property="actiontime" column="actionTime"/>
+        <result property="address" column="address"/>
+        <result property="people" column="people"/>
+        <result property="event" column="event"/>
+        <result property="title" column="title"/>
+    </resultMap>
+
+
+</mapper>

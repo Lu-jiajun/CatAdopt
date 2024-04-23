@@ -1,0 +1,39 @@
+@startuml
+
+
+actor 用户
+participant 前端页面
+participant UserController
+participant UserServiceImpl
+participant UserRepository
+
+用户 -> 前端页面: 填写注册信息并点击“注册”按钮
+activate 前端页面
+前端页面 -> UserController: 发送注册请求 (userInfo)
+activate UserController
+UserController -> UserServiceImpl: 调用 register(userInfo) 方法
+activate UserServiceImpl
+UserServiceImpl -> UserRepository: 查询用户名是否已存在
+activate UserRepository
+UserRepository --> UserServiceImpl: 返回查询结果
+deactivate UserRepository
+alt 用户名已存在
+  UserServiceImpl --> UserController: 返回错误信息
+else 用户名不存在
+  UserServiceImpl -> UserServiceImpl: 对密码进行加密
+  UserServiceImpl -> UserRepository: 保存用户信息
+  activate UserRepository
+  UserRepository --> UserServiceImpl: 返回保存结果
+  deactivate UserRepository
+  UserServiceImpl --> UserController: 返回操作结果
+end
+deactivate UserServiceImpl
+UserController --> 前端页面: 返回结果 (成功或错误信息)
+deactivate UserController
+alt 注册成功
+  前端页面 --> 用户: 提示注册成功，跳转到登录页面
+else 注册失败
+  前端页面 --> 用户: 显示错误信息
+end
+deactivate 前端页面
+@enduml

@@ -1,0 +1,26 @@
+    @startuml
+    'autonumber off
+
+    actor 管理员
+    participant 前端页面
+    participant LogController
+    participant LogServiceImpl
+    participant LogRepository
+
+    管理员 -> 前端页面: 点击“查看系统日志”按钮
+    activate 前端页面
+    前端页面 -> LogController: 发送获取系统日志请求
+    activate LogController
+    LogController -> LogServiceImpl: 调用 getLogs() 方法
+    activate LogServiceImpl
+    LogServiceImpl -> LogRepository: 查询系统日志
+    activate LogRepository
+    LogRepository --> LogServiceImpl: 返回系统日志列表
+    deactivate LogRepository
+    LogServiceImpl --> LogController: 返回系统日志列表
+    deactivate LogServiceImpl
+    LogController --> 前端页面: 返回系统日志列表
+    deactivate LogController
+    前端页面 --> 管理员: 显示系统日志列表
+    deactivate 前端页面
+    @enduml

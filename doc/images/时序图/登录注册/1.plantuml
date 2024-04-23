@@ -1,0 +1,41 @@
+@startuml
+
+
+actor 用户
+participant 前端页面
+participant AuthController
+participant AuthServiceImpl
+participant UserRepository
+
+用户 -> 前端页面: 输入用户名和密码，点击“登录”按钮
+activate 前端页面
+前端页面 -> AuthController: 发送登录请求 (username, password)
+activate AuthController
+AuthController -> AuthServiceImpl: 调用 login(username, password) 方法
+activate AuthServiceImpl
+AuthServiceImpl -> UserRepository: 查询用户信息
+activate UserRepository
+UserRepository --> AuthServiceImpl: 返回用户信息
+deactivate UserRepository
+alt 用户信息存在
+  AuthServiceImpl -> AuthServiceImpl: 验证密码
+  alt 密码正确
+    AuthServiceImpl -> AuthServiceImpl: 生成 JWT token
+    AuthServiceImpl --> AuthController: 返回 JWT token
+  else 密码错误
+    AuthServiceImpl --> AuthController: 返回错误信息
+  end
+else 用户信息不存在
+  AuthServiceImpl --> AuthController: 返回错误信息
+end
+deactivate AuthServiceImpl
+AuthController --> 前端页面: 返回结果 (token 或错误信息)
+deactivate AuthController
+alt 登录成功
+  前端页面 -> 前端页面: 将 token 保存到本地存储
+  前端页面 --> 用户: 跳转到用户主页
+else 登录失败
+  前端页面 --> 用户: 显示错误信息
+end
+deactivate 前端页面
+@enduml

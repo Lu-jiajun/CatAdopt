@@ -1,0 +1,454 @@
+@startuml
+
+'!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AdminsController {
+  + save(AdminsEntity): R
+  + info(Integer): R
+  + delete(Integer[]): R
+  + update(AdminsEntity): R
+  + list(Map<String, Object>): R
+  + AdminsController(): 
+}
+interface AdminsDao << interface >>
+class AdminsEntity {
+  - birthday: Date
+  - adminpwd: String
+  - sex: String
+  - id: Integer
+  - email: String
+  - remark: String
+  - adminname: String
+  - telephone: String
+  - realname: String
+  - pic: String
+   email: String
+   remark: String
+   realname: String
+   adminpwd: String
+   pic: String
+   sex: String
+   id: Integer
+   birthday: Date
+   adminname: String
+   telephone: String
+  + hashCode(): int
+  # canEqual(Object): boolean
+  + toString(): String
+  + equals(Object): boolean
+  + AdminsEntity(): 
+}
+interface AdminsService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class AdminsServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + AdminsServiceImpl(): 
+}
+class AdoptanimalController {
+  + info(Integer): R
+  + delete(Integer[]): R
+  + list(Map<String, Object>): R
+  + update(AdoptanimalEntity): R
+  + save(AdoptanimalEntity): R
+  + AdoptanimalController(): 
+}
+interface AdoptanimalDao << interface >>
+class AdoptanimalEntity {
+  - adopttime: Date
+  - state: Integer
+  - id: Integer
+  - userid: Integer
+  - petid: Integer
+   userid: Integer
+   adopttime: Date
+   id: Integer
+   petid: Integer
+   state: Integer
+  + hashCode(): int
+  + toString(): String
+  # canEqual(Object): boolean
+  + equals(Object): boolean
+  + AdoptanimalEntity(): 
+}
+interface AdoptanimalService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class AdoptanimalServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + AdoptanimalServiceImpl(): 
+}
+class AnswerController {
+  + list(Map<String, Object>): R
+  + info(Integer): R
+  + save(AnswerEntity): R
+  + delete(Integer[]): R
+  + update(AnswerEntity): R
+  + AnswerController(): 
+}
+interface AnswerDao << interface >>
+class AnswerEntity {
+  - id: Integer
+  - commentid: Integer
+  - userid: Integer
+  - answertime: Date
+  - content: String
+  - replyid: Integer
+   answertime: Date
+   userid: Integer
+   content: String
+   commentid: Integer
+   replyid: Integer
+   id: Integer
+  + equals(Object): boolean
+  + toString(): String
+  + hashCode(): int
+  # canEqual(Object): boolean
+  + AnswerEntity(): 
+}
+interface AnswerService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class AnswerServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + AnswerServiceImpl(): 
+}
+class ApplyController {
+  + list(Map<String, Object>): R
+  + info(Integer): R
+  + delete(Integer[]): R
+  + save(ApplyEntity): R
+  + update(ApplyEntity): R
+  + ApplyController(): 
+}
+interface ApplyDao << interface >>
+class ApplyEntity {
+  - state: Integer
+  - name: String
+  - email: String
+  - age: Integer
+  - id: Integer
+  - applytime: Date
+  - telephone: String
+  - message: String
+   name: String
+   applytime: Date
+   email: String
+   age: Integer
+   message: String
+   state: Integer
+   id: Integer
+   telephone: String
+  + hashCode(): int
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + toString(): String
+  + ApplyEntity(): 
+}
+interface ApplyService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class ApplyServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + ApplyServiceImpl(): 
+}
+class BasicController {
+  + saveUser(User): String
+  + hello(String): String
+  + html(): String
+  + user(): User
+  + parseUser(String, Integer, User): void
+  + BasicController(): 
+}
+class BlogController {
+  + list(Map<String, Object>): R
+  + update(BlogEntity): R
+  + info(Integer): R
+  + delete(Integer[]): R
+  + save(BlogEntity): R
+  + BlogController(): 
+}
+interface BlogDao << interface >>
+class BlogEntity {
+  - address: String
+  - id: Integer
+  - actiontime: Date
+  - event: String
+  - people: String
+  - title: String
+   actiontime: Date
+   address: String
+   title: String
+   id: Integer
+   people: String
+   event: String
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + equals(Object): boolean
+  + toString(): String
+  + BlogEntity(): 
+}
+interface BlogService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class BlogServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + BlogServiceImpl(): 
+}
+class CatApplication {
+  + main(String[]): void
+  + CatApplication(): 
+}
+class CatApplicationTests {
+  ~ contextLoads(): void
+  + CatApplicationTests(): 
+}
+class HelpController {
+  + info(Integer): R
+  + list(Map<String, Object>): R
+  + delete(Integer[]): R
+  + save(HelpEntity): R
+  + update(HelpEntity): R
+  + HelpController(): 
+}
+interface HelpDao << interface >>
+class HelpEntity {
+  - state: Integer
+  - adminsid: Integer
+  - userid: Integer
+  - content: String
+  - petid: Integer
+  - commenttime: Date
+  - id: Integer
+   userid: Integer
+   content: String
+   adminsid: Integer
+   petid: Integer
+   state: Integer
+   id: Integer
+   commenttime: Date
+  + equals(Object): boolean
+  + toString(): String
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + HelpEntity(): 
+}
+interface HelpService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class HelpServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + HelpServiceImpl(): 
+}
+class PathVariableController {
+  + getLogin(String, String): String
+  + getRegExp(String): String
+  + PathVariableController(): 
+}
+class PetController {
+  + list(Map<String, Object>): R
+  + save(PetEntity): R
+  + delete(Integer[]): R
+  + info(Integer): R
+  + update(PetEntity): R
+  + PetController(): 
+}
+interface PetDao << interface >>
+class PetEntity {
+  - id: Integer
+  - pettype: String
+  - petname: String
+  - remark: String
+  - sex: String
+  - birthday: Date
+  - pic: String
+  - state: Integer
+   petname: String
+   remark: String
+   state: Integer
+   pettype: String
+   pic: String
+   sex: String
+   id: Integer
+   birthday: Date
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + equals(Object): boolean
+  + toString(): String
+  + PetEntity(): 
+}
+interface PetService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class PetServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + PetServiceImpl(): 
+}
+class PetsexController {
+  + delete(String[]): R
+  + list(Map<String, Object>): R
+  + save(PetsexEntity): R
+  + update(PetsexEntity): R
+  + info(String): R
+  + PetsexController(): 
+}
+interface PetsexDao << interface >>
+class PetsexEntity {
+  - pettype: String
+  - petname: String
+   pettype: String
+   petname: String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  ~ extract(year): 
+  + PetsexEntity(): 
+}
+interface PetsexService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class PetsexServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + PetsexServiceImpl(): 
+}
+class User {
+  - name: String
+  - age: Integer
+   name: String
+   age: Integer
+  + User(): 
+}
+class UserController {
+  + list(Map<String, Object>): R
+  + save(UserEntity): R
+  + delete(Integer[]): R
+  + update(UserEntity): R
+  + info(Integer): R
+  + UserController(): 
+}
+interface UserDao << interface >>
+class UserEntity {
+  - pic: String
+  - state: Integer
+  - age: Integer
+  - email: String
+  - address: String
+  - sex: String
+  - id: Integer
+  - password: String
+  - telephone: String
+  - username: String
+   password: String
+   age: Integer
+   email: String
+   state: Integer
+   pic: String
+   username: String
+   address: String
+   sex: String
+   id: Integer
+   telephone: String
+  + equals(Object): boolean
+  + hashCode(): int
+  # canEqual(Object): boolean
+  + toString(): String
+  + UserEntity(): 
+}
+interface UserService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class UserServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + UserServiceImpl(): 
+}
+class UserreplyController {
+  + save(UserreplyEntity): R
+  + list(Map<String, Object>): R
+  + update(UserreplyEntity): R
+  + info(Integer): R
+  + delete(Integer[]): R
+  + UserreplyController(): 
+}
+interface UserreplyDao << interface >>
+class UserreplyEntity {
+  - userid: Integer
+  - content: String
+   userid: Integer
+   content: String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  + UserreplyEntity(): 
+}
+interface UserreplyService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class UserreplyServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + UserreplyServiceImpl(): 
+}
+class VolunteerController {
+  + info(Integer): R
+  + delete(Integer[]): R
+  + update(VolunteerEntity): R
+  + save(VolunteerEntity): R
+  + list(Map<String, Object>): R
+  + VolunteerController(): 
+}
+interface VolunteerDao << interface >>
+class VolunteerEntity {
+  - email: String
+  - age: Integer
+  - message: String
+  - name: String
+  - telephone: String
+  - applytime: Date
+  - id: Integer
+   name: String
+   applytime: Date
+   email: String
+   age: Integer
+   message: String
+   id: Integer
+   telephone: String
+  # canEqual(Object): boolean
+  + equals(Object): boolean
+  + toString(): String
+  + hashCode(): int
+  + VolunteerEntity(): 
+}
+interface VolunteerService << interface >> {
+  + queryPage(Map<String, Object>): PageUtils
+}
+class VolunteerServiceImpl {
+  + queryPage(Map<String, Object>): PageUtils
+  + VolunteerServiceImpl(): 
+}
+
+AdminsController       "1" *-[#595959,plain]-> "adminsService\n1" AdminsService          
+AdminsServiceImpl       -[#008200,dashed]-^  AdminsService          
+AdoptanimalController  "1" *-[#595959,plain]-> "adoptanimalService\n1" AdoptanimalService     
+AdoptanimalServiceImpl  -[#008200,dashed]-^  AdoptanimalService     
+AnswerController       "1" *-[#595959,plain]-> "answerService\n1" AnswerService          
+AnswerServiceImpl       -[#008200,dashed]-^  AnswerService          
+ApplyController        "1" *-[#595959,plain]-> "applyService\n1" ApplyService           
+ApplyServiceImpl        -[#008200,dashed]-^  ApplyService           
+BlogController         "1" *-[#595959,plain]-> "blogService\n1" BlogService            
+BlogServiceImpl         -[#008200,dashed]-^  BlogService            
+HelpController         "1" *-[#595959,plain]-> "helpService\n1" HelpService            
+HelpServiceImpl         -[#008200,dashed]-^  HelpService            
+PetController          "1" *-[#595959,plain]-> "petService\n1" PetService             
+PetServiceImpl          -[#008200,dashed]-^  PetService             
+PetsexController       "1" *-[#595959,plain]-> "petsexService\n1" PetsexService          
+PetsexServiceImpl       -[#008200,dashed]-^  PetsexService          
+UserController         "1" *-[#595959,plain]-> "userService\n1" UserService            
+UserServiceImpl         -[#008200,dashed]-^  UserService            
+UserreplyController    "1" *-[#595959,plain]-> "userreplyService\n1" UserreplyService       
+UserreplyServiceImpl    -[#008200,dashed]-^  UserreplyService       
+VolunteerController    "1" *-[#595959,plain]-> "volunteerService\n1" VolunteerService       
+VolunteerServiceImpl    -[#008200,dashed]-^  VolunteerService       
+@enduml

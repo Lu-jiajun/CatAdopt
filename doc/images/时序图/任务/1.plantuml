@@ -1,0 +1,26 @@
+@startuml
+'autonumber
+
+actor 管理员
+participant 前端页面
+participant TaskController
+participant TaskServiceImpl
+participant TaskRepository
+
+管理员 -> 前端页面: 填写任务信息并点击“发布任务”按钮
+activate 前端页面
+前端页面 -> TaskController: 发送发布任务请求 (taskInfo)
+activate TaskController
+TaskController -> TaskServiceImpl: 调用 createTask(taskInfo) 方法
+activate TaskServiceImpl
+TaskServiceImpl -> TaskRepository: 调用 insertTask(taskInfo) 方法
+activate TaskRepository
+TaskRepository --> TaskServiceImpl: 返回新增任务 ID
+deactivate TaskRepository
+TaskServiceImpl --> TaskController: 返回操作结果
+deactivate TaskServiceImpl
+TaskController --> 前端页面: 返回操作结果
+deactivate TaskController
+前端页面 --> 管理员: 显示操作结果
+deactivate 前端页面
+@enduml
