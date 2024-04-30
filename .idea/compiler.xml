@@ -18,6 +18,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="cat (2)" target="1.8" />
       <module name="profile" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -3,7 +3,7 @@
              xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>fun.catadopt</groupId>
-    <artifactId>volunteer</artifactId>
+    <artifactId>CatAdopt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>CatAdopt</name>
     <description>CatAdopt</description>
@@ -17,7 +17,7 @@
         <module>volunteer</module>
         <module>cat</module>
         <module>common</module>
-        <module>common</module>
+<!--        <module>common</module>-->
     </modules>
     <packaging>pom</packaging>
     <properties>
