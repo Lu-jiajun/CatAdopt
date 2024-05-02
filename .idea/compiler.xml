@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="volunteer" />
         <module name="common" />
+        <module name="gatway" />
         <module name="cat" />
         <module name="renren-fast" />
         <module name="donate" />
@@ -24,6 +25,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="gatway" options="-parameters" />
       <module name="renren-fast" options="-parameters" />
       <module name="renren-generator" options="-parameters" />
     </option>

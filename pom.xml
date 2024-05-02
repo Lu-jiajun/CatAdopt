@@ -17,6 +17,7 @@
         <module>volunteer</module>
         <module>cat</module>
         <module>common</module>
+        <module>gatway</module>
 <!--        <module>common</module>-->
     </modules>
     <packaging>pom</packaging>

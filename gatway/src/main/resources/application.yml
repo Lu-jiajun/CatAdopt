@@ -1,0 +1,40 @@
+# 注册中心的信息
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: cat_route
+          uri: lb://cat
+          predicates:
+            - Path=/app/cat/**,/hello
+          filters:
+            - RewritePath=/app/(?<segment>/?.*), /$\{segment}
+        - id: app_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/app/**
+          filters:
+            - RewritePath=/app/(?<segment>/?.*), /renren-fast/$\{segment}
+
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8080
+#        client-ip: localhost
+#        port: 8719
+
+# localhost:8070/app/captcha.jpg -->
+# localhost:8080/app/captcha.jpg localhost:8080/renren-fast/captcha.jpg
+# 指定注册中心的服务端口
+server:
+  port: 8070
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
